@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fff4f7">
+<meta name="description" content="A little anniversary letter">
+<title>จดหมายถึงเธอ 🤍</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Kanit:wght@300;400;500&display=swap');
+
+:root{
+  --pink:#f7b8c9;
+  --deep:#8f5269;
+  --cream:#fffaf5;
+  --paper:#fffdf9;
+  --ink:#5c4750;
+  --shadow:0 22px 60px rgba(120,75,90,.18);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--ink);
+  font-family:'Kanit',sans-serif;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255,255,255,.9) 0 5px, transparent 6px),
+    radial-gradient(circle at 85% 15%, rgba(255,255,255,.75) 0 4px, transparent 5px),
+    linear-gradient(135deg,#fff0f4 0%,#fff8ef 48%,#f9eff8 100%);
+  overflow-x:hidden;
+}
+body:before{
+  content:"";
+  position:fixed; inset:0; pointer-events:none; z-index:0;
+  background-image:
+    radial-gradient(rgba(255,255,255,.65) 1px,transparent 1px),
+    radial-gradient(rgba(219,157,177,.12) 1px,transparent 1px);
+  background-size:28px 28px,44px 44px;
+  background-position:0 0,14px 14px;
+}
+button{font-family:inherit}
+.hidden{display:none!important}
+
+/* floating decorations */
+.decor{
+  position:fixed; z-index:1; pointer-events:none; user-select:none;
+  animation:float 5s ease-in-out infinite;
+  filter:drop-shadow(0 5px 8px rgba(120,70,90,.1));
+}
+.decor.flower{font-size:38px}
+.decor.heart{font-size:25px}
+.d1{top:8%;left:5%}.d2{top:16%;right:6%;animation-delay:-1.5s}
+.d3{bottom:10%;left:7%;animation-delay:-3s}.d4{bottom:18%;right:8%;animation-delay:-2s}
+@keyframes float{50%{transform:translateY(-14px) rotate(5deg)}}
+
+/* envelope screen */
+#opening{
+  position:fixed; inset:0; z-index:20;
+  display:flex; align-items:center; justify-content:center;
+  padding:24px;
+  background:linear-gradient(135deg,rgba(255,244,247,.98),rgba(255,250,243,.98));
+  transition:opacity .8s ease,visibility .8s ease;
+}
+#opening.hide{opacity:0;visibility:hidden;pointer-events:none}
+.open-card{text-align:center;max-width:520px}
+.open-card h1{
+  margin:0 0 8px;
+  font-family:'Itim',cursive;
+  font-size:clamp(36px,8vw,64px);
+  color:var(--deep);
+}
+.open-card p{margin:0 0 24px;color:#9a7482}
+.envelope-wrap{width:min(310px,76vw);height:220px;margin:15px auto 30px;position:relative;cursor:pointer}
+.envelope{
+  position:absolute;inset:25px 0 0;
+  background:#f7c7d4;border-radius:8px;
+  box-shadow:0 22px 45px rgba(120,75,90,.2);
+  overflow:hidden;
+}
+.envelope:before,.envelope:after{
+  content:"";position:absolute;bottom:0;width:0;height:0;
+  border-style:solid;z-index:2;
+}
+.envelope:before{
+  left:0;border-width:105px 155px 0 0;border-color:#efb5c6 transparent transparent transparent;
+}
+.envelope:after{
+  right:0;border-width:0 155px 105px 0;border-color:transparent #e9a9bd transparent transparent;
+}
+.flap{
+  position:absolute;top:25px;left:0;width:0;height:0;z-index:4;
+  border-left:155px solid transparent;border-right:155px solid transparent;
+  border-top:105px solid #f9d6df;
+  transform-origin:top center;
+  transition:transform .7s ease;
+}
+.envelope-wrap:hover .flap{transform:rotateX(18deg)}
+.seal{
+  position:absolute;z-index:6;left:50%;top:112px;transform:translate(-50%,-50%);
+  width:54px;height:54px;border-radius:50%;
+  display:grid;place-items:center;background:#fff4f7;
+  box-shadow:0 6px 16px rgba(100,50,70,.18);font-size:25px;
+}
+.tap{font-size:14px;color:#a36a7d;animation:pulse 1.8s infinite}
+@keyframes pulse{50%{opacity:.5}}
+
+/* intro modal */
+#intro{
+  position:fixed;inset:0;z-index:15;display:flex;align-items:center;justify-content:center;
+  padding:22px;background:rgba(74,39,51,.22);backdrop-filter:blur(7px);
+  opacity:0;visibility:hidden;transition:.45s ease;
+}
+#intro.show{opacity:1;visibility:visible}
+.intro-box{
+  width:min(520px,100%);padding:36px 28px 30px;text-align:center;
+  background:var(--paper);border:1px solid rgba(255,255,255,.8);
+  border-radius:28px;box-shadow:var(--shadow);position:relative;
+  transform:translateY(20px) scale(.97);transition:.45s ease;
+}
+#intro.show .intro-box{transform:none}
+.bear{font-size:78px;line-height:1;display:block;margin-bottom:10px;animation:bob 2.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-7px) rotate(2deg)}}
+.intro-box h2{font-family:'Itim',cursive;font-size:38px;color:var(--deep);margin:5px 0 10px}
+.intro-box p{font-size:18px;line-height:1.8;margin:0 0 24px;color:#765a64}
+.read-btn{
+  border:0;border-radius:999px;padding:13px 30px;font-size:17px;color:white;
+  background:linear-gradient(135deg,#d98fa9,#b87592);cursor:pointer;
+  box-shadow:0 9px 20px rgba(184,117,146,.28);transition:.2s;
+}
+.read-btn:hover{transform:translateY(-2px);box-shadow:0 13px 24px rgba(184,117,146,.35)}
+.read-btn:active{transform:translateY(0)}
+
+/* letter */
+#letterPage{position:relative;z-index:2;min-height:100vh;padding:45px 14px 90px}
+.letter{
+  width:min(760px,100%);margin:0 auto;background:rgba(255,253,249,.96);
+  border:1px solid rgba(220,177,190,.45);border-radius:24px;
+  box-shadow:var(--shadow);padding:clamp(24px,5vw,58px);
+  position:relative;overflow:hidden;
+}
+.letter:before{
+  content:"";position:absolute;inset:12px;border:1px dashed rgba(208,143,165,.25);
+  border-radius:18px;pointer-events:none;
+}
+.ribbon{
+  text-align:center;color:#a65f78;font-size:14px;letter-spacing:2px;margin-bottom:14px;
+}
+.title{
+  position:relative;text-align:center;font-family:'Itim',cursive;color:var(--deep);
+  font-size:clamp(30px,6vw,48px);line-height:1.15;margin:0 0 8px;
+}
+.subtitle{text-align:center;color:#a87989;margin:0 0 36px}
+.flowers{text-align:center;font-size:26px;letter-spacing:8px;margin-bottom:25px}
+#typed{
+  position:relative;white-space:pre-wrap;font-size:17px;line-height:2.05;
+  letter-spacing:.01em;min-height:180px;
+  overflow-wrap:anywhere;
+}
+#typed::after{
+  content:"";display:inline-block;width:2px;height:1.1em;background:#b87592;
+  vertical-align:-.15em;margin-left:2px;animation:blink .8s steps(1) infinite;
+}
+@keyframes blink{50%{opacity:0}}
+.signature{
+  margin-top:45px;text-align:center;font-family:'Itim',cursive;color:var(--deep);
+  font-size:28px;opacity:0;transform:translateY(10px);transition:1s;
+}
+.signature.show{opacity:1;transform:none}
+.footer-heart{text-align:center;font-size:28px;margin-top:18px;opacity:.8}
+
+/* little petals */
+.petal{
+  position:fixed;top:-40px;z-index:10;pointer-events:none;
+  animation:fall linear forwards;opacity:.8;
+}
+@keyframes fall{
+  to{transform:translate3d(var(--x),110vh,0) rotate(420deg);opacity:.15}
+}
+
+@media(max-width:600px){
+  #letterPage{padding:25px 9px 70px}
+  .letter{
+    padding:30px 20px 42px;
+    border-radius:20px;
+  }
+  .letter:before{inset:9px}
+  #typed{
+    font-size:16px;
+    line-height:2;
+    letter-spacing:0;
+  }
+  .title{font-size:34px}
+  .subtitle{font-size:13px;margin-bottom:25px}
+  .flowers{font-size:22px;letter-spacing:4px}
+  .intro-box h2{font-size:32px}
+  .intro-box p{font-size:16px}
+  .d1,.d3{left:2%}.d2,.d4{right:2%}
+}
+</style>
+</head>
+<body>
+
+<div class="decor flower d1">🌷</div>
+<div class="decor heart d2">🤍</div>
+<div class="decor flower d3">🌼</div>
+<div class="decor heart d4">💗</div>
+
+<section id="opening">
+  <div class="open-card">
+    <h1>มีจดหมายถึงเธอ 🤍</h1>
+    <p>จดหมายเล็ก ๆ ที่ตั้งใจเขียนให้คนพิเศษ</p>
+    <div class="envelope-wrap" id="envelope" aria-label="เปิดจดหมาย">
+      <div class="envelope"></div>
+      <div class="flap"></div>
+      <div class="seal">🤍</div>
+    </div>
+    <div class="tap">แตะที่ซองจดหมายเพื่อเปิด</div>
+  </div>
+</section>
+
+<section id="intro">
+  <div class="intro-box">
+    <span class="bear">🧸</span>
+    <h2>จ๊ะเอ๋ตัวเอง 🤍</h2>
+    <p>นี่ถึงเธอผู้เป็นที่รัก<br>มีอะไรบางอย่างอยากให้เธออ่านจนจบเลยนะ</p>
+    <button class="read-btn" id="readBtn">กดอ่านต่อสิ ♡</button>
+  </div>
+</section>
+
+<main id="letterPage">
+  <article class="letter">
+    <div class="ribbon">A LITTLE LETTER FOR YOU</div>
+    <h1 class="title">Happy Anniversary 🤍</h1>
+    <p class="subtitle">1 year 1 month · 7 September 2025</p>
+    <div class="flowers">🌷 🌼 🧸 🌼 🌷</div>
+    <div id="typed"></div>
+    <div class="signature" id="signature">ด้วยความรักและความตั้งใจทั้งหมด 🤍</div>
+    <div class="footer-heart">♡　🌷　♡　🌷　♡</div>
+  </article>
+</main>
+
+<script>
+const letterText = `𝐇𝐚𝐩𝐩𝐲 𝐀𝐧𝐧𝐢𝐯𝐞𝐫𝐬𝐚𝐫𝐲 𝟏 𝐲𝐞𝐚𝐫 𝟏 𝐦𝐨𝐧𝐭𝐡🤍
+สุขสันต์วันครบรอบ 1 ปี 1 เดือนนะเธอ 🤍
+
+เผลอแป๊บเดียว เราก็เดินมาด้วยกันไกลขนาดนี้แล้วนะ ตั้งแต่วันที่ 7 กันยายน 2025 จนถึงวันนี้ มันมีเรื่องเกิดขึ้นกับเราสองคนเยอะมากจริงๆ มีทั้งวันที่เรามีความสุข มีวันที่หัวเราะด้วยกัน มีวันที่คิดถึงกันจนอยากอยู่ข้างๆกันตลอด แล้วก็มีวันที่เราเองเป็นคนทำให้เธอเสียใจ เป็นวันที่เราเกือบทำให้สิ่งที่เราสร้างมาด้วยกันพังลงไป
+
+วันครบรอบครั้งนี้ เราไม่มีของขวัญอะไรที่จับต้องได้ให้เธอเลย ไม่มีอะไรพิเศษที่จะเอาไปวางตรงหน้าเธอแล้วบอกว่านี่คือของขวัญสำหรับ 1 ปี 1 เดือนของเรา สิ่งเดียวที่เรามีจริงๆก็คือคำพูดพวกนี้ และความรู้สึกทั้งหมดที่อยู่ในใจเรา เราเลยอยากเขียนมันออกมาให้เธอได้อ่าน ถึงมันอาจจะไม่ได้มีค่ามากเท่าของที่ซื้อให้กันได้ แต่อย่างน้อยทุกคำตรงนี้ เราตั้งใจเขียนให้เธอจริงๆ
+
+ก่อนอื่นเราอยากขอโทษนะ
+
+ขอโทษสำหรับทุกเรื่องที่เราเคยทำให้เธอเสียใจ โดยเฉพาะเรื่องที่เราโกหกเธอ ขอโทษที่ทำลายความไว้ใจที่เธอเคยให้เรามากๆ ทั้งที่เรารู้ว่าเธอเกลียดการโกหกมากแค่ไหน และเธอเคยให้อภัยเรามาแล้วครั้งหนึ่ง แต่เรากลับทำให้เธอต้องมาเจอกับความรู้สึกแบบเดิมอีก
+
+เรารู้ว่าคำว่า “ขอโทษ” มันไม่ได้ลบสิ่งที่เกิดขึ้นได้ และไม่ได้ทำให้เธอลืมความรู้สึกที่เคยเสียใจได้ทันที เรารู้ว่าบางแผลมันไม่ได้หายเพียงเพราะคนที่ทำพูดว่าขอโทษ และเราเองก็ไม่มีสิทธิ์ไปเร่งให้เธอกลับมาเชื่อใจเราเร็วๆ
+
+ขอโทษที่บางช่วงเราให้เวลาเธอน้อยเกินไป ตอบช้า ตอบสั้น ไม่ค่อยถามว่าเธอรู้สึกยังไง ไม่ค่อยได้อยู่ตรงนั้นในเวลาที่เธอต้องการเรา ทั้งที่สำหรับเธอ เรื่องพวกนี้มันสำคัญมาก และขอโทษที่บางครั้งคำพูดของเราดูเหมือนจะบอกว่าเราเข้าใจ แต่การกระทำของเรากลับทำให้เธอรู้สึกว่าเราไม่ได้เข้าใจอะไรเลย
+
+เราเสียใจนะที่คนที่เราอยากให้รู้สึกปลอดภัยเวลาอยู่ด้วย กลับต้องมาระแวงกับเรา ต้องคิดมากกับคำพูดหรือการกระทำของเรา และต้องคอยถามตัวเองว่าเราจะทำแบบเดิมอีกไหม
+
+เราไม่อยากให้เธอต้องรู้สึกแบบนั้นเลย
+
+ตลอดเวลาที่ผ่านมา เธอสอนอะไรเราเยอะมากจริงๆ เธอสอนให้เรารู้ว่าความรักที่จริงใจมันเป็นยังไง สอนให้เรารู้ว่าการมีใครสักคนที่รักเราและไว้ใจเรามากๆมันมีค่าขนาดไหน และทำให้เราได้รู้ว่าความรักไม่ใช่แค่การบอกว่ารักกัน แต่คือการทำให้อีกคนรู้สึกว่าเขาสำคัญจริงๆด้วย
+
+และเรายอมรับเลยว่าในหลายๆครั้ง เราทำตรงนั้นได้ไม่ดีพอ
+
+แต่ถึงอย่างนั้น เราก็ยังดีใจมากนะที่คนที่อยู่ข้างเราในวันนี้ยังเป็นเธอ
+
+ช่วงนี้เรารู้ว่าเธอเองก็มีเรื่องที่หนักอยู่ในใจ หลายอย่างที่เธอต้องเจอ เราอาจไม่รู้ทั้งหมดด้วยซ้ำว่าเธอกำลังรู้สึกยังไง และบางครั้งเวลาที่เราบอกว่า “ถ้ามีอะไรให้ช่วยบอกเราได้นะ” แล้วเธอตอบกลับมาว่า “ไม่มีใครช่วยเค้าได้หรอก” มันทำให้เราใจหายนะ
+
+ไม่ใช่เพราะเราโกรธที่เธอไม่ให้เราช่วย แต่เพราะเราอยากให้เธอรู้ว่า ต่อให้เราอาจช่วยเธอไม่ได้ทุกเรื่อง เราก็ยังอยากอยู่ตรงนี้
+
+เราอาจแก้ปัญหาให้เธอไม่ได้
+เราอาจทำให้เรื่องที่เธอกำลังเจอมันหายไปไม่ได้
+เราอาจไม่มีคำพูดที่ดีพอสำหรับทุกเรื่อง
+แต่ถ้าวันไหนเธอเหนื่อย เราอยากเป็นคนที่เธอหันมาแล้วเจอ
+ถ้าวันไหนเธอไม่ไหว เราอยากเป็นคนที่ยังอยู่ตรงนี้
+และถ้าวันไหนเธอไม่อยากพูดอะไรเลย เราก็ไม่จำเป็นต้องบังคับให้เธอพูดก็ได้
+
+เราแค่อยากให้เธอรู้ว่าเธอไม่จำเป็นต้องเก่งตลอดเวลา และไม่จำเป็นต้องรับทุกอย่างไว้คนเดียวตลอด
+
+ถ้าเธอให้เราอยู่ข้างๆ เราจะอยู่
+ถ้าเธอต้องการให้เราช่วย เราจะช่วยเท่าที่เราช่วยได้
+และถ้าสุดท้ายเรื่องนั้นใหญ่เกินกว่าที่เราจะช่วยได้ อย่างน้อยเราก็อยากเป็นคนที่นั่งอยู่ข้างๆเธอ ไม่ใช่คนที่เดินหนีไปเพราะช่วยอะไรไม่ได้
+
+เราไม่รู้ว่าอนาคตของเราจะเป็นยังไง เราไม่กล้าสัญญาว่าต่อจากนี้เราจะไม่ทำผิดเลย เพราะเราเองก็เป็นคนธรรมดาคนหนึ่ง แต่สิ่งที่เราสัญญาได้คือ เราจะพยายามเรียนรู้จากทุกอย่างที่ผ่านมา และจะไม่ทำเป็นลืมว่าครั้งหนึ่งเราเคยทำให้เธอเสียใจแค่ไหน
+
+เราอยากให้ความรักของเราหลังจากวันนี้ ไม่ได้มีแค่คำว่า “รัก” แต่มีความสบายใจ มีความซื่อสัตย์ มีเวลา มีการใส่ใจกัน และมีการกระทำที่ทำให้เธอรู้สึกได้จริงๆว่าเธอยังสำคัญกับเรา
+
+ขอบคุณนะที่ยังอยู่ด้วยกันมาจนถึงวันนี้
+ขอบคุณสำหรับทุกวันที่รักเรา
+ขอบคุณสำหรับทุกครั้งที่อดทนกับเรา
+ขอบคุณสำหรับทุกครั้งที่เคยให้อภัย
+ขอบคุณสำหรับทุกความทรงจำที่เราได้มีด้วยกัน
+และขอบคุณที่ครั้งหนึ่งเธอเลือกให้เราเข้าไปเป็นส่วนหนึ่งในชีวิตของเธอ
+
+ถ้าย้อนกลับไปได้ เราคงอยากกอดตัวเราในวันนั้นแล้วบอกว่า “ดูแลคนคนนี้ให้ดีกว่านี้นะ อย่าทำให้เขาต้องร้องไห้เพราะเราเลย”
+
+แต่ในเมื่อย้อนกลับไปแก้อะไรไม่ได้แล้ว สิ่งที่เราทำได้คือดูแลวันนี้ให้ดีกว่าเมื่อวาน และพยายามทำให้วันต่อๆไปของเราดีกว่าที่ผ่านมา
+
+วันครบรอบ 1 ปี 1 เดือนนี้ เราอาจไม่มีของขวัญให้เธอเลย มีแค่ข้อความยาวๆจากคนคนหนึ่งที่เคยทำผิดกับเธอหลายครั้ง แต่ก็ยังรักเธอมาก และยังอยากพยายามรักษาความสัมพันธ์ของเราเอาไว้
+
+เราไม่รู้ว่าข้อความนี้จะมีค่ากับเธอมากแค่ไหน แต่เราอยากให้เธอรู้ว่า ทุกคำที่เขียนมา เราเขียนจากใจจริงๆ
+
+ขอโทษสำหรับทุกอย่างที่เคยทำให้เธอเจ็บนะ
+ขอบคุณที่ยังอยู่ตรงนี้
+แล้วก็ขอบคุณที่ทำให้เราได้รู้จักความรักที่เราไม่เคยรู้จักมาก่อน
+
+สุขสันต์วันครบรอบ 1 ปี 1 เดือนนะเธอ
+
+เรายังดีใจนะ ที่คนข้างๆเราในวันนี้ยังเป็นเธอ
+และถ้าเธอยังยอมให้เราอยู่ตรงนี้ เราจะพยายามทำให้เธอรู้สึกให้ได้ว่า การที่เธอเลือกอยู่กับเราในวันนั้น มันไม่ใช่การเลือกที่สูญเปล่าเลย 🤍`;
+
+const opening = document.getElementById('opening');
+const intro = document.getElementById('intro');
+const envelope = document.getElementById('envelope');
+const readBtn = document.getElementById('readBtn');
+const typed = document.getElementById('typed');
+const signature = document.getElementById('signature');
+
+envelope.addEventListener('click', () => {
+  opening.classList.add('hide');
+  setTimeout(() => intro.classList.add('show'), 650);
+});
+
+readBtn.addEventListener('click', () => {
+  intro.classList.remove('show');
+  document.body.style.overflow = 'auto';
+  setTimeout(() => {
+    document.getElementById('letterPage').scrollIntoView({behavior:'smooth',block:'start'});
+    typeWriter();
+  }, 500);
+});
+
+let started = false;
+function typeWriter(){
+  if(started) return;
+  started = true;
+  let i = 0;
+  // ความเร็วตัวหนังสือ: เลขมาก = ค่อยๆ พิมพ์ช้าลง
+  // ผู้รับสามารถเลื่อนขึ้นลงอ่านเองได้ตลอด ไม่มีการบังคับเลื่อนหน้าจอ
+  const speed = 75;
+  function type(){
+    if(i < letterText.length){
+      typed.textContent += letterText.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    }else{
+      typed.insertAdjacentHTML('afterend','');
+      signature.classList.add('show');
+      makePetals(28);
+    }
+  }
+  type();
+}
+
+function makePetals(amount){
+  const icons=['🌸','🌷','🤍','💗','✨'];
+  for(let i=0;i<amount;i++){
+    const p=document.createElement('div');
+    p.className='petal';
+    p.textContent=icons[Math.floor(Math.random()*icons.length)];
+    p.style.left=Math.random()*100+'vw';
+    p.style.fontSize=(12+Math.random()*14)+'px';
+    p.style.animationDuration=(5+Math.random()*7)+'s';
+    p.style.animationDelay=(Math.random()*2)+'s';
+    p.style.setProperty('--x',(Math.random()*160-80)+'px');
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),14000);
+  }
+}
+</script>
+</body>
+</html>
